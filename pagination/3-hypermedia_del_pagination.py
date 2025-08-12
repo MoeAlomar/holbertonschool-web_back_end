@@ -36,7 +36,7 @@ class Server:
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """Deletion-resilient pagination"""
-        assert index is not None and 0 <= index < len(self.__indexed_dataset), "index out of range"
+        assert index is not None and 0 <= index < len(self.__indexed_dataset)
 
         data = []
         collected = 0
@@ -52,7 +52,8 @@ class Server:
         # current_index now points to next index to query
         next_index = current_index
         # skip any deleted indexes for next_index
-        while next_index <= max_index and next_index not in self.__indexed_dataset:
+        while (next_index <= max_index and
+        next_index not in self.__indexed_dataset):
             next_index += 1
 
         return {
