@@ -50,19 +50,19 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
-        Return the appropriate page of the dataset based on pagination parameters.
+        Return the appropriate page of the dataset based on pagination.
 
         Args:
-            page (int, optional): The page number (1-indexed). Defaults to 1.
-            page_size (int, optional): The number of items per page. Defaults to 10.
+            page (int, optional): The page number (1-indexed).
+            page_size (int, optional): The number of items per page.
 
         Returns:
             List[List]: The requested page of the dataset.
         """
         assert isinstance(
-            page, int) and page > 0, "page must be a positive int"
+            page, int) and page > 0
         assert isinstance(
-            page_size, int) and page_size > 0, "page_size must be a positive int"
+            page_size, int) and page_size > 0
 
         dataset = self.dataset()
         start_idx, end_idx = index_range(page, page_size)
@@ -74,19 +74,19 @@ class Server:
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         """
-        Return a dictionary containing pagination information and dataset page.
+        Return a dictionary containing pagination information
 
         Args:
-            page (int, optional): The page number (1-indexed). Defaults to 1.
-            page_size (int, optional): The number of items per page. Defaults to 10.
+            page (int, optional): The page number (1-indexed).
+            page_size (int, optional): The number of items per page.
 
         Returns:
             dict: A dictionary containing:
                 - page_size (int): Number of items on the current page.
                 - page (int): Current page number.
                 - data (List[List]): The dataset page.
-                - next_page (int or None): Next page number, or None if no next page.
-                - prev_page (int or None): Previous page number, or None if no previous page.
+                - next_page (int or None): Next page number, or None.
+                - prev_page (int or None): Previous page number, or None
                 - total_pages (int): Total number of pages in the dataset.
         """
         data = self.get_page(page, page_size)
