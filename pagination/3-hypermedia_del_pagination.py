@@ -23,7 +23,6 @@ class Server:
                 reader = csv.reader(f)
                 dataset = [row for row in reader]
             self.__dataset = dataset[1:]
-
         return self.__dataset
 
     def indexed_dataset(self) -> Dict[int, List]:
@@ -35,13 +34,10 @@ class Server:
             }
         return self.__indexed_dataset
 
-    def get_hyper_index(self, index: int = None,
-    page_size: int = 10) -> Dict:
+    def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """Deletion-resilient pagination"""
         assert index is not None and 0 <= index < len(self.__indexed_dataset)
 
-        if index is None:
-            index = 0
         data = []
         collected = 0
         current_index = index
@@ -57,7 +53,7 @@ class Server:
         next_index = current_index
         # skip any deleted indexes for next_index
         while (next_index <= max_index and
-        next_index not in self.__indexed_dataset):
+               next_index not in self.__indexed_dataset):
             next_index += 1
 
         return {
