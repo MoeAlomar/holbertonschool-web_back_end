@@ -1,0 +1,2 @@
+// this script shows all data in collection school
+db.school.find()
