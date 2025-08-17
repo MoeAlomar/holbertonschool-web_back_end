@@ -7,7 +7,7 @@ Display statistics about Nginx logs stored in MongoDB
 from pymongo import MongoClient
 
 if __name__ == "__main__":
-    client = MongoClient('mongodb://127.0.0.1:27017')
+    client = MongoClient('localhost', 27017)
     db = client.logs
     collection = db.nginx
 
