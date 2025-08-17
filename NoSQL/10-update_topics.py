@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
-""" this module updates the topics of
-a specific school name in the collection."""
-
 def update_topics(mongo_collection, name, topics):
-        """
-    Collection: argv[1]
+    """
+    Update all topics of a school document by name.
+
+    Collection: school
     Document model: { "name": <str>, "topics": [<str>] }
 
-    Update all documents with the given name,
-    setting their topics field to the provided list.
+    Args:
+        mongo_collection: pymongo collection object
+        name (str): school name to update
+        topics (list[str]): new topics list
     """
     mongo_collection.update_many(
-        {"name": name}, { "$set": {"topics": topics} })
+        {"name": name},
+        {"$set": {"topics": topics}}
+    )
