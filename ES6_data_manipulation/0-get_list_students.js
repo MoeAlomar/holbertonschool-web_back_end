@@ -1,10 +1,7 @@
-class Student {
-    constructor(id, firstName, location){
-    }
-}
-s1 = new Student(1, "Guillaume", "San Fransisco")
-s2 = new Student(2, "James", "Colombia")
-s3 = new Student(5, "Serena", "San Fransisco")
 export default function getListStudents(){
-    return [s1, s2, s3]
+    return [
+    {id: 1, firstName: "Guillaume", location: "San Fransisco"}
+    {id: 2, firstName: "James", location: "Colombia"}
+    {id: 5, firstName: "Serena", location: "San Fransisco"}
+    ]
 }
