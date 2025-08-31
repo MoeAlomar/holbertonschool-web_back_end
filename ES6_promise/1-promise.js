@@ -3,7 +3,7 @@ export default function getFullResponseFromAPI(success){
     if (success){
         resolve({
             "status": 200,
-            "body": "sucess",
+            "body": "success",
         });
     
     }
