@@ -1,31 +1,31 @@
-import fs from 'fs';
+const fs = require('fs');
 
-function readDatabase(filePath) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(filePath, 'utf8', (err, data) => {
-      if (err) {
-        reject(new Error('Cannot load the database'));
-        return;
+function readDatabase(path) {
+  return new Promise((resolve, reject) => { // eslint-disable-line consistent-return
+    if (!path) {
+      return reject(new Error('Cannot load the database'));
+    }
+    fs.readFile(path, 'utf8', (error, data) => {
+      if (error) {
+        return reject(new Error('Cannot load the database'));
       }
+      const studentline = data.split('\n');
+      const students = studentline.slice(1);
+      const validStudents = students.filter((line) => line.trim() !== '');
+      const studentsByField = {};
 
-      const lines = data.split(/\r?\n/).filter((line) => line.trim() !== '');
-      if (lines.length <= 1) {
-        resolve({});
-        return;
+      for (const studentline of validStudents) {
+        const parts = studentline.split(',');
+        const firstname = parts[0];
+        const field = parts[parts.length - 1];
+
+        if (!studentsByField[field]) {
+          studentsByField[field] = [];
+        }
+        studentsByField[field].push(firstname);
       }
-
-      const rows = lines.slice(1).map((line) => line.split(',').map((s) => s.trim()));
-
-      const groups = {};
-      rows.forEach(([firstname, , , field]) => {
-        if (!firstname || !field) return;
-        if (!groups[field]) groups[field] = [];
-        groups[field].push(firstname);
-      });
-
-      resolve(groups);
+      return resolve(studentsByField);
     });
   });
 }
-
-export default readDatabase;
+module.exports = readDatabase;
