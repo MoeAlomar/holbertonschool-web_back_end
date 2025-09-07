@@ -4,4 +4,3 @@ export default class AppController {
       res.send('Hello Holberton School!');
     }
   }
-  
